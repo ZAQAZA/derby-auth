@@ -77,6 +77,7 @@ accessControl = (store) ->
     return next() unless shareRequest.docName? and shareRequest.agent.connectSession?.userId?
     return next() if shareRequest.collection isnt "auths"
     return next() if shareRequest.docName is shareRequest.agent.connectSession.userId
+    next()
     next new Error("Not allowed to fetch users who are not you.")
     
   store.shareClient.use "subscribe", protectRead
